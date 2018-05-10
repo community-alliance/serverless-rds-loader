@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: larse514/circle-ci-node-docker:latest
-    working_directory: ~serverless-rds-loader
+    working_directory: ~/serverless-rds-loader
 
     environment:
       - IMAGE: "larse514/rds-loader"
