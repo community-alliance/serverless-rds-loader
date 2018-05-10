@@ -18,12 +18,15 @@ jobs:
             ls
             pwd
       - run:
+          working_directory: /home/circleci/serverless-rds-loader/task
           name: build docker image
           command: docker build . -t ${IMAGE}:${CIRCLE_BUILD_NUM}
       - run:
+          working_directory: /home/circleci/serverless-rds-loader/task
           name: Docker login
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
+          working_directory: /home/circleci/serverless-rds-loader/task
           name: Docker Push
           command: docker push ${IMAGE}:${CIRCLE_BUILD_NUM}
 
