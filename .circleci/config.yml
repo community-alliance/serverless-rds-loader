@@ -2,11 +2,13 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:4.8.2
+      - image: larse514/circle-ci-node-docker:latest
     environment:
-      - BUCKET_NAME: "project.feedme.rds.scripts"
+      - IMAGE: "larse514/rds-loader"
     steps:
       - checkout
+      - setup_remote_docker:   # (2)
+          docker_layer_caching: true # (3)
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -20,8 +22,15 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: code-coverage
-          command: 'npm run cover'
+          name: build docker image
+          command: npm run docker-build -- -t ${IMAGE}:${CIRCLE_BUILD_NUM}
+      - run:
+          name: Docker login
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Docker Push
+          command: npm run docker-push -- ${IMAGE}:${CIRCLE_BUILD_NUM}
+
       - store_artifacts:
           path: test-results.xml
           prefix: tests
