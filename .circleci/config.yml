@@ -11,13 +11,13 @@ jobs:
           docker_layer_caching: true # (3)
       - run:
           name: build docker image
-          command: npm run docker-build -- -t ${IMAGE}:${CIRCLE_BUILD_NUM}
+          command: docker build . -t ${IMAGE}:${CIRCLE_BUILD_NUM}
       - run:
           name: Docker login
           command: docker login -u $DOCKER_USER -p $DOCKER_PASS
       - run:
           name: Docker Push
-          command: npm run docker-push -- ${IMAGE}:${CIRCLE_BUILD_NUM}
+          command: docker push ${IMAGE}:${CIRCLE_BUILD_NUM}
 
       - store_artifacts:
           path: test-results.xml
