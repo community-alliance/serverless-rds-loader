@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS Recipe;
+
+DROP TABLE IF EXISTS RecipeCuisine;
+
+DROP TABLE IF EXISTS PrimaryIngredient;
+
 DROP TABLE IF EXISTS CookingMethod;
 
 CREATE TABLE CookingMethod (
@@ -8,7 +14,6 @@ CREATE TABLE CookingMethod (
 
 );
 
-DROP TABLE IF EXISTS PrimaryIngredient;
 
 CREATE TABLE PrimaryIngredient (
     ingredient_id INT NOT NULL AUTO_INCREMENT,
@@ -17,7 +22,6 @@ CREATE TABLE PrimaryIngredient (
 
 );
 
-DROP TABLE IF EXISTS RecipeCuisine;
 
 CREATE TABLE RecipeCuisine (
     recipecuisine_id INT NOT NULL AUTO_INCREMENT,
@@ -25,7 +29,6 @@ CREATE TABLE RecipeCuisine (
     date_created DATE, PRIMARY KEY (recipecuisine_id), UNIQUE (recipecuisine_name)
 
 );
-DROP TABLE IF EXISTS Recipe;
 
 CREATE TABLE Recipe (
     recipe_id INT NOT NULL AUTO_INCREMENT,
@@ -43,7 +46,6 @@ CREATE TABLE Recipe (
     UNIQUE (recipe_name)
 
 );
-
 insert into CookingMethod (method_name, image_url,date_created) values ("Slow Cooker","https://s3.amazonaws.com/simplyfed-assets/image/images.crateandbarrel_1.jpg",CURDATE());
 insert into CookingMethod (method_name,image_url, date_created) values ("Sous Vide","https://s3.amazonaws.com/simplyfed-assets/image/images.crateandbarrel_2.jpg",CURDATE());
 insert into CookingMethod (method_name,image_url, date_created) values ("Juicer","https://s3.amazonaws.com/simplyfed-assets/image/images.crateandbarrel_3.jpg",CURDATE());
