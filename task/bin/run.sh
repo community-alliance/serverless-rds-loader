@@ -15,7 +15,7 @@ temppassword="${password%\"}"
 password="${temppassword#\"}"
 
 aws s3 cp s3://$BUCKET/$KEY .
-echo "username ${username}"
-echo "password ${password}"
+
+
 mysql -h ${DBURL} -u ${username} -p${password} ${DBNAME} < $KEY
 
